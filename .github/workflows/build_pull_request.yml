@@ -1,46 +1,56 @@
-name: Build pull request
+name: Build private maintenance
 
 on:
-  workflow_dispatch:
-    inputs:
-      pr:
-        description: "PR to build"
-        required: true
+  push:
+    branches:
+      - dev
   pull_request:
     branches:
       - dev
+  workflow_dispatch:
+    inputs:
+      pr:
+        description: "Optional PR number to build"
+        required: false
+
+permissions:
+  contents: read
+  packages: read
 
 jobs:
-  release:
+  build:
     name: Build
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
+    timeout-minutes: 45
 
     steps:
       - name: Checkout
         uses: actions/checkout@v6
         with:
           ref: ${{ inputs.pr && format('refs/pull/{0}/merge', inputs.pr) || github.ref }}
-
+          fetch-depth: 0
       - name: Setup Java
         uses: actions/setup-java@v5
         with:
-          distribution: 'temurin'
-          java-version: '17'
+          distribution: temurin
+          java-version: "17"
 
-      - name: Cache Gradle
-        uses: burrunan/gradle-cache-action@v3
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v6
 
-      - name: Build
+      - name: Validate FantaMK maintenance state
+        run: python .fantamk/check_maintenance.py
+
+      - name: Build Android RVP
         env:
           ORG_GRADLE_PROJECT_githubPackagesUsername: ${{ github.actor }}
-          ORG_GRADLE_PROJECT_githubPackagesPassword: ${{ secrets.GITHUB_TOKEN }}
+          ORG_GRADLE_PROJECT_githubPackagesPassword: ${{ github.token }}
         run: ./gradlew :patches:buildAndroid --no-daemon
 
-      - name: Upload artifacts
+      - name: Upload RVP artifact
         uses: actions/upload-artifact@v7
         with:
-          name: revanced-patches
-          path: patches/build/libs
+          name: revanced-patches-private
+          path: patches/build/libs/*.rvp
+          if-no-files-found: error
           archive: false

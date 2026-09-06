@@ -1,3 +1,5 @@
+> **FantaMK private maintenance fork.** This repository preserves ReVanced attribution and tracks the official temporary GitLab upstream. Private maintenance state and provenance are documented under .fantamk/.
+
 <p align="center">
   <picture>
     <source
