@@ -1,6 +1,6 @@
 # Full bundle Android validation
 
-Candidate target: `6.2.1-fantamk.1`.
+Candidate target: `fantamk-6.2.1-candidate.1` (`6.2.1-fantamk.1`).
 Previous validated LKG: `fantamk-6.1.0-lkg.1`.
 
 Controlled target:
@@ -13,6 +13,11 @@ Patch under test:
 - `Change package name`
 - Universal patch from the full 6.2.1-equivalent bundle.
 - Default expected package: `com.fantamk.fullbundletest.revanced`.
+
+Reference PC result: PASS on final CI artifacts from run `34034682653`.
+- RVP: 294 patches; ZIP integrity PASS; metadata exact-match with official v6.2.1.
+- `Change package name`: PASS without `--force`.
+- Manifest changed to `com.fantamk.fullbundletest.revanced`.
 
 Reference method:
 - Build the controlled fixture.

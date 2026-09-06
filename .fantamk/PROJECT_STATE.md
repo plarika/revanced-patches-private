@@ -30,6 +30,7 @@
 - Unbranded candidate CI run `34034052448`: PASS.
 - Private bundle identity (`FantaMK ReVanced Patches`): SET / final CI pending.
 - Controlled PC patch test before private identity change: PASS; final branded RVP test pending.
+- Private Candidate 1 published: PASS (`fantamk-6.2.1-candidate.1`).
 - Android Manager import: PENDING.
 - Android patch/install/runtime: PENDING.
 - Signature verification: BLOCKED_BY_UPSTREAM_TLS while the official keys endpoint returns Cloudflare 526.
