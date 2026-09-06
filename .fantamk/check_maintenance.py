@@ -28,6 +28,7 @@ required = [
     ROOT / ".fantamk" / "UPSTREAM_BASE.md",
     ROOT / ".fantamk" / "PROJECT_STATE.md",
     ROOT / ".fantamk" / "MAINTENANCE_POLICY.md",
+    ROOT / ".fantamk" / "check_official_api.py",
     ROOT / ".fantamk" / "OFFICIAL_6_2_1.md",
     ROOT / ".fantamk" / "fixtures" / "full-bundle-test-app" / "settings.gradle.kts",
     ROOT / ".fantamk" / "fixtures" / "full-bundle-test-app" / "build.gradle.kts",
