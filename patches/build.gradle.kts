@@ -2,12 +2,12 @@ group = "app.revanced"
 
 patches {
     about {
-        name = "ReVanced Patches"
-        description = "Patches for ReVanced"
-        source = "git@github.com:revanced/revanced-patches.git"
-        author = "ReVanced"
-        contact = "patches@revanced.app"
-        website = "https://revanced.app"
+        name = "FantaMK ReVanced Patches"
+        description = "Private maintenance build of ReVanced Patches"
+        source = "https://github.com/plarika/revanced-patches-private"
+        author = "ReVanced / FantaMK"
+        contact = "https://github.com/plarika"
+        website = "https://github.com/plarika/revanced-patches-private"
         license = "GNU General Public License v3.0"
     }
 }
@@ -35,7 +35,7 @@ publishing {
     repositories {
         maven {
             name = "githubPackages"
-            url = uri("https://maven.pkg.github.com/revanced/revanced-patches")
+            url = uri("https://maven.pkg.github.com/plarika/revanced-patches-private")
             credentials(PasswordCredentials::class)
         }
     }

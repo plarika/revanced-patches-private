@@ -36,3 +36,14 @@ Validation:
 - Patch-list exact match: PASS.
 
 FantaMK candidate version is deliberately changed to `6.2.1-fantamk.1` so the private build is distinguishable in ReVanced Manager.
+
+## Private candidate identity
+
+The FantaMK candidate intentionally changes only project/distribution metadata outside patch implementation code:
+- Version: `6.2.1-fantamk.1`.
+- Bundle name: `FantaMK ReVanced Patches`.
+- Source/website: private repository `plarika/revanced-patches-private`.
+- Author field: `ReVanced / FantaMK` to preserve upstream attribution and identify private maintenance.
+- GitHub Packages publishing target: the private repository.
+
+No files under patch implementation or extension source trees are changed by this identity step.

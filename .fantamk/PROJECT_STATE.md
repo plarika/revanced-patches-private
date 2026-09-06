@@ -27,8 +27,9 @@
 
 - Candidate version field `6.2.1-fantamk.1`: SET / local validation PASS.
 - Official API/hash verifier: PASS against `v6.2.1` and the recorded RVP SHA-256.
-- Candidate Linux/JDK17 CI: PENDING.
-- Controlled PC patch test with candidate RVP: PENDING.
+- Unbranded candidate CI run `34034052448`: PASS.
+- Private bundle identity (`FantaMK ReVanced Patches`): SET / final CI pending.
+- Controlled PC patch test before private identity change: PASS; final branded RVP test pending.
 - Android Manager import: PENDING.
 - Android patch/install/runtime: PENDING.
 - Signature verification: BLOCKED_BY_UPSTREAM_TLS while the official keys endpoint returns Cloudflare 526.
