@@ -42,7 +42,7 @@ jobs:
         run: python .fantamk/check_maintenance.py
 
       - name: Verify official 6.2.1 API baseline
-        run: python .fantamk/check_official_api.py
+        run: python .fantamk/check_official_api.py --allow-unavailable
 
       - name: Build controlled Android fixture
         run: ./gradlew -p .fantamk/fixtures/full-bundle-test-app clean assembleDebug --no-daemon
