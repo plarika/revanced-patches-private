@@ -44,14 +44,10 @@
 - Update detection creates or updates a private GitHub issue; it never updates patch sources, releases, tags, `main`, `dev`, or the LKG automatically.
 - Same-version RVP hash changes are treated as integrity anomalies and fail the watcher.
 - Transient upstream 5xx/526/network failures are reported without mutating the repository.
-- Full repository validation for watcher integration: PASS (run 34038458276).
-- Manual watcher validation on main: PASS (run 34038934705, status CURRENT).
-- Open upstream maintenance issues after current-baseline test: 0.
 
 ## BRANCH MODEL
 
 - `main`: promoted LKG only.
 - `dev`: validated maintenance.
 - `maintenance/6.2.1-source`: provenance and candidate history.
-- `maintenance/upstream-watch`: watcher integration history.
 - `upstream-patches`: fetch only; push disabled locally.
