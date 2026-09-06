@@ -25,7 +25,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           ref: ${{ inputs.pr && format('refs/pull/{0}/merge', inputs.pr) || github.ref }}
           fetch-depth: 0
