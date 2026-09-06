@@ -1,0 +1,90 @@
+name: Watch upstream ReVanced patches
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "17 */6 * * *"
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: watch-upstream-revanced-patches
+  cancel-in-progress: true
+
+jobs:
+  watch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Setup Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.x"
+
+      - name: Check official upstream
+        id: watch
+        run: |
+          python .fantamk/watch_upstream.py \
+            --allow-unavailable \
+            --report upstream-watch.md \
+            --github-output "$GITHUB_OUTPUT"
+
+      - name: Add report to workflow summary
+        if: always()
+        run: cat upstream-watch.md >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Upload watch report
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: upstream-watch-report
+          path: upstream-watch.md
+          if-no-files-found: error
+
+      - name: Create or update maintenance issue
+        if: >-
+          steps.watch.outputs.status == 'update_available' ||
+          steps.watch.outputs.status == 'same_version_hash_changed'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          STATUS: ${{ steps.watch.outputs.status }}
+          VERSION: ${{ steps.watch.outputs.version }}
+        run: |
+          if [ "$STATUS" = "same_version_hash_changed" ]; then
+            TITLE="Upstream ReVanced Patches integrity anomaly: $VERSION"
+          else
+            TITLE="Upstream ReVanced Patches update: $VERSION"
+          fi
+          export TITLE
+          ISSUE_NUMBER=$(gh issue list --state open --limit 100 --json number,title \
+            --jq '.[] | select(.title == env.TITLE) | .number' | head -n 1)
+          if [ -n "$ISSUE_NUMBER" ]; then
+            gh issue comment "$ISSUE_NUMBER" --body-file upstream-watch.md
+          else
+            gh issue create --title "$TITLE" --body-file upstream-watch.md
+          fi
+
+      - name: Close resolved update issue
+        if: steps.watch.outputs.status == 'current'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          VERSION: ${{ steps.watch.outputs.version }}
+        run: |
+          TITLE="Upstream ReVanced Patches update: $VERSION"
+          export TITLE
+          ISSUE_NUMBER=$(gh issue list --state open --limit 100 --json number,title \
+            --jq '.[] | select(.title == env.TITLE) | .number' | head -n 1)
+          if [ -n "$ISSUE_NUMBER" ]; then
+            gh issue close "$ISSUE_NUMBER" \
+              --comment "Baseline updated and watcher is current. Closing automatically."
+          fi
+
+      - name: Fail on same-version hash anomaly
+        if: steps.watch.outputs.status == 'same_version_hash_changed'
+        run: |
+          echo "Official RVP hash changed without an official version change."
+          exit 1

@@ -1,0 +1,9 @@
+{
+  "official_version": "v6.2.1",
+  "official_created_at": "2026-06-02T18:30:00",
+  "official_rvp_sha256": "50F41E4656B7374A1C8FE5579FD107F697F86D7F13FC6CD194CF3821761DC4B4",
+  "official_patch_count": 294,
+  "lkg_bundle_version": "6.2.1-fantamk.1",
+  "lkg_tag": "fantamk-6.2.1-lkg.1",
+  "source_snapshot": "09afcf3e44d6d8c98810b1cbf6f39477f9bcae66"
+}
