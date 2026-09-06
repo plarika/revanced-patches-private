@@ -1,3 +1,5 @@
+> **FantaMK private maintenance fork.** This repository preserves ReVanced attribution and tracks the official temporary GitLab upstream. Private maintenance state and provenance are documented under .fantamk/.
+
 <p align="center">
   <picture>
     <source
@@ -81,7 +83,7 @@ Some of the features the patches provide are:
   export activities, etc.
 * ✨ **And much more!**
 
-For a complete list of all available patches, see [this](https://github.com/ReVanced/revanced-documentation/blob/main/docs/revanced-resources/questions.md#5-which-patches-are-available).
+For a complete list of all available patches, visit [revanced.app/patches](https://revanced.app/patches).
 
 ## 🚀 How to get started
 
