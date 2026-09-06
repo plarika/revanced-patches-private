@@ -35,16 +35,6 @@
 - Android patch/install/runtime: PASS.
 - Signature verification of the official detached signature remains `BLOCKED_BY_UPSTREAM_TLS` while the official keys endpoint returns Cloudflare 526.
 
-## UPSTREAM WATCH
-
-- Automatic detection workflow: `.github/workflows/watch_upstream.yml`.
-- Schedule: every 6 hours at minute 17 UTC, plus manual dispatch.
-- Baseline: `.fantamk/upstream_baseline.json`.
-- Current baseline status: `v6.2.1` / `fantamk-6.2.1-lkg.1`.
-- Update detection creates or updates a private GitHub issue; it never updates patch sources, releases, tags, `main`, `dev`, or the LKG automatically.
-- Same-version RVP hash changes are treated as integrity anomalies and fail the watcher.
-- Transient upstream 5xx/526/network failures are reported without mutating the repository.
-
 ## BRANCH MODEL
 
 - `main`: promoted LKG only.
