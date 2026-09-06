@@ -28,6 +28,10 @@ required = [
     ROOT / ".fantamk" / "UPSTREAM_BASE.md",
     ROOT / ".fantamk" / "PROJECT_STATE.md",
     ROOT / ".fantamk" / "MAINTENANCE_POLICY.md",
+    ROOT / ".fantamk" / "fixtures" / "full-bundle-test-app" / "settings.gradle.kts",
+    ROOT / ".fantamk" / "fixtures" / "full-bundle-test-app" / "build.gradle.kts",
+    ROOT / ".fantamk" / "fixtures" / "full-bundle-test-app" / "src" / "main" / "AndroidManifest.xml",
+    ROOT / ".fantamk" / "fixtures" / "full-bundle-test-app" / "src" / "main" / "java" / "com" / "fantamk" / "fullbundletest" / "MainActivity.java",
 ]
 for path in required:
     require(path.is_file(), f"missing {path.relative_to(ROOT)}")

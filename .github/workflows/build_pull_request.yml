@@ -41,6 +41,17 @@ jobs:
       - name: Validate FantaMK maintenance state
         run: python .fantamk/check_maintenance.py
 
+      - name: Build controlled Android fixture
+        run: ./gradlew -p .fantamk/fixtures/full-bundle-test-app clean assembleDebug --no-daemon
+
+      - name: Upload controlled fixture artifact
+        uses: actions/upload-artifact@v7
+        with:
+          name: fantamk-full-bundle-test-app
+          path: .fantamk/fixtures/full-bundle-test-app/build/outputs/apk/debug/fantamk-full-bundle-test-app-debug.apk
+          if-no-files-found: error
+          archive: false
+
       - name: Build Android RVP
         env:
           ORG_GRADLE_PROJECT_githubPackagesUsername: ${{ github.actor }}
